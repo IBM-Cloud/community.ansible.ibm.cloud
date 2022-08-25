@@ -1,0 +1,40 @@
+
+---
+- name: IKS Custom Ansible Modules
+  hosts: localhost
+
+  # User input variables
+  vars_prompt:
+    - name: name
+      prompt: Enter cluster name or id
+    
+    - name: ibmcloud_api_key
+      prompt: Enter api key
+
+    - name: resource_group_id
+      prompt: Enter resource_group_id
+
+    - name: alb_type
+      prompt: Enter alb_type (supported values public, private and all)
+    
+    - name: list_bounded_services
+      prompt: Would you like to list the binded services (True/False)
+
+  #Execute before tasks
+  pre_tasks:
+    - set_fact:
+        # Making varaible values accessible across repo
+        zip_path: /tmp/kubeConfig-{{ name }}.zip
+        kube_config_path: /tmp/kubeConfig-{{ name }}
+        IC_IAM_TOKEN: "{{ lookup('env','IC_IAM_TOKEN') }}"
+        IC_IAM_REFRESH_TOKEN: "{{ lookup('env','IC_IAM_REFRESH_TOKEN') }}"
+        name: "{{ name }}"
+        ibmcloud_api_key: "{{ ibmcloud_api_key }}"
+        resource_group_id: "{{ resource_group_id }}"
+        alb_type: "{{ alb_type }}"
+        list_bounded_services: "{{ list_bounded_services }}"
+
+- name: View cluster {{ name }} info
+  hosts: localhost
+  roles:
+    - role: ../roles/cluster_info

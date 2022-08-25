@@ -1,0 +1,5 @@
+---
+- name: Delete earlier instances of kube config if any
+  file:
+    path: "{{ kube_config_path }}"
+    state: absent
