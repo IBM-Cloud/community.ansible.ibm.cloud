@@ -1,0 +1,3 @@
+---
+# defaults file for kube_config
+zip_path: ~/.kube/

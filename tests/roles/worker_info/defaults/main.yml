@@ -1,0 +1,3 @@
+---
+# defaults file for pod_failure
+zip_path: ~/.kube/
