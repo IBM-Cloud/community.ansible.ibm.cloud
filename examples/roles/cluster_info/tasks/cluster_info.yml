@@ -7,8 +7,6 @@
     alb_type: "{{ alb_type }}"
     list_bounded_services: "{{ list_bounded_services }}"
   register: cluster_info
-
 - name: Cluster {{ name }} info
   debug:
     var:  cluster_info
-

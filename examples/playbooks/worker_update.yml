@@ -1,0 +1,22 @@
+---
+- name: IKS Custom Ansible Modules
+  hosts: localhost
+  collections:
+   - ibm.ibmcloud
+  tasks:
+    - name: Fetch the variables from var file
+      include_vars:
+        file: vars.yml
+    - name: Executing Worker node update Task
+      ibm_container_cluster_worker:
+        name: "{{ name }}"
+        worker_id: "{{ worker_id }}" 
+        resource_group_id: "{{ resource_group_id }}"
+        ibmcloud_api_key: "{{ ibmcloud_api_key }}"
+        api_command:
+          action: "{{action}}"
+          force: True
+      register: worker_reload_response
+    - name: worker node reload info
+      debug:
+        var:  worker_reload_response

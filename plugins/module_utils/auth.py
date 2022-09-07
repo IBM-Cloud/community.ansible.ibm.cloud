@@ -13,9 +13,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
 import os
-import requests
+import json
+import traceback
+
+try:
+    import requests
+except ImportError:
+    HAS_ANOTHER_LIBRARY = False
+    ANOTHER_LIBRARY_IMPORT_ERROR = traceback.format_exc()
+else:
+    HAS_ANOTHER_LIBRARY = True
+
 
 class Authenticator:
     """
@@ -23,10 +34,10 @@ class Authenticator:
     """
     # Class Variable
     DEFAULT_SERVICE_URL = 'https://iam.cloud.ibm.com/identity/token'
- 
+
     # The init method or constructor
     def __init__(self, api_key):
- 
+
         # Instance Variable
         self.api_key = api_key
         if api_key == '':
@@ -40,11 +51,15 @@ class Authenticator:
             'Content-Type': 'application/x-www-form-urlencoded',
         }
 
-        data = 'grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey='+self.api_key
+        data = 'grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey={}'
+        # data = 'grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey='+self.api_key
+        data = data.format(self.api_key)
 
         response = requests.post(
-                            Authenticator.DEFAULT_SERVICE_URL,
-                            headers=headers,
-                            data=data
-                        )
-        return response.json()['access_token']
+            Authenticator.DEFAULT_SERVICE_URL,
+            headers=headers,
+            data=data
+        )
+        dataJson = json.loads(response.content)
+        bearerToken = "Bearer " + dataJson["access_token"]
+        return bearerToken

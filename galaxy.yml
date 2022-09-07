@@ -1,9 +1,10 @@
 namespace: "ibm"
-name: "ibm-cloud"
+name: "ibmcloud"
 version: "1.0.0"
 readme: "README.md"
 authors:
     - "Umar Ali"
+    - "Janardhana Anipireddy"
 description: "Ansible modules collection for IBM-Cloud."
 license:
     - "MPL-2.0"

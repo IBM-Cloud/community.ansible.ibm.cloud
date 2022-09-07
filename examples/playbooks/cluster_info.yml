@@ -1,22 +1,16 @@
-
 ---
 - name: IKS Custom Ansible Modules
   hosts: localhost
-
   # User input variables
   vars_prompt:
     - name: name
       prompt: Enter cluster name or id
-    
     - name: ibmcloud_api_key
       prompt: Enter api key
-
     - name: resource_group_id
       prompt: Enter resource_group_id
-
     - name: alb_type
-      prompt: Enter alb_type (supported values public, private and all)
-    
+      prompt: Enter alb_type (supported values public, private and all)  
     - name: list_bounded_services
       prompt: Would you like to list the binded services (True/False)
 
