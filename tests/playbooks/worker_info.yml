@@ -1,0 +1,36 @@
+
+---
+- name: IKS Custom Ansible Modules
+  hosts: localhost
+
+  # User input variables
+  vars_prompt:
+    - name: name
+      prompt: Enter cluster name or id
+  
+    - name: worker_id
+      prompt: Enter worker id
+
+    - name: ibmcloud_api_key
+      prompt: Enter api key
+
+    - name: resource_group_id
+      prompt: Enter resource_group_id
+
+  #Execute before tasks
+  pre_tasks:
+    - set_fact:
+        # Making varaible values accessible across repo
+        zip_path: /tmp/kubeConfig-{{ name }}.zip
+        kube_config_path: /tmp/kubeConfig-{{ name }}
+        IC_IAM_TOKEN: "{{ lookup('env','IC_IAM_TOKEN') }}"
+        IC_IAM_REFRESH_TOKEN: "{{ lookup('env','IC_IAM_REFRESH_TOKEN') }}"
+        name: "{{ name }}"
+        worker_id: "{{ worker_id }}"
+        ibmcloud_api_key: "{{ ibmcloud_api_key }}"
+        resource_group_id: "{{ resource_group_id }}"
+
+- name: View node {{ worker_id }} details
+  hosts: localhost
+  roles:
+    - role: ../roles/worker_info

@@ -1,0 +1,14 @@
+---
+- name: Executing Worker node Info Task
+  ibm_container_cluster_worker_info:
+    iam_key : "{{ IC_IAM_TOKEN }}"
+    name: "{{ name }}"
+    worker_id: "{{ worker_id }}" 
+    resource_group_id: "{{ resource_group_id }}"
+    ibmcloud_api_key: "{{ ibmcloud_api_key }}"
+  register: worker_info
+
+- name: worker node {{ worker_id }} info
+  debug:
+    var:  worker_info
+
