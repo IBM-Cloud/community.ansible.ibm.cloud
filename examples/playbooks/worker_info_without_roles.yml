@@ -1,0 +1,19 @@
+---
+- name: IKS Custom Ansible Modules
+  hosts: localhost
+  collections:
+   - ibm.ibmcloud
+  tasks:
+    - name: Fetch the variables from var file
+      include_vars:
+        file: vars.yml
+    - name: Executing Worker node Info Task
+      ibm_container_cluster_worker_info:
+        name: "{{ name }}"
+        worker_id: "{{ worker_id }}" 
+        resource_group_id: "{{ resource_group_id }}"
+        ibmcloud_api_key: "{{ ibmcloud_api_key }}"
+      register: worker_info
+    - name: worker node {{ worker_id }} info
+      debug:
+        var:  worker_info

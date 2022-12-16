@@ -1,0 +1,6 @@
+---
+name: "clusterid"
+worker_id: "workerid"
+ibmcloud_api_key: ""
+resource_group_id: "groupid"
+action: reload

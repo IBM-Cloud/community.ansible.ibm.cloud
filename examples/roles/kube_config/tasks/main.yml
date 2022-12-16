@@ -1,0 +1,11 @@
+---
+# tasks file for pod_failure
+
+- name: Download kube config
+  import_tasks: download_kube_config.yml
+
+- name: Delete existing kube config file
+  import_tasks: delete_old_kube_config.yml
+  
+- name: Read kube config
+  import_tasks: read_kube_config.yml
