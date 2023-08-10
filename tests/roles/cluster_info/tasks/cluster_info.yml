@@ -1,0 +1,14 @@
+---
+- name: Cluster Info Task
+  ibm.ibm_cloud.ibm_container_cluster_info:
+    name: "{{ name }}"
+    ibmcloud_api_key: "{{ ibmcloud_api_key }}"
+    resource_group_id: "{{ resource_group_id }}"
+    alb_type: "{{ alb_type }}"
+    list_bounded_services: "{{ list_bounded_services }}"
+  register: cluster_info
+
+- name: Cluster {{ name }} info
+  debug:
+    var:  cluster_info
+

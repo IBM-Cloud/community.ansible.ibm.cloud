@@ -1,0 +1,2 @@
+- name: Display Cluster Info
+  import_tasks: cluster_info.yml

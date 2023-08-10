@@ -1,0 +1,16 @@
+namespace: "ibm"
+name: "ibm_cloud"
+version: "1.0.0"
+readme: "README.md"
+authors:
+    - "Ankur Gupta"
+description: "Ansible modules collection for IBM-Cloud."
+license:
+    - "MPL-2.0"
+issues: "https://github.com/IBM-Cloud/community.ansible.ibm.cloud/issues"
+tags:
+    - ibmcloud
+    - cloud
+    - collection
+    - ansible
+repository: "https://github.com/IBM-Cloud/community.ansible.ibm.cloud"
